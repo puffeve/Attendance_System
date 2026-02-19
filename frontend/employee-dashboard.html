@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employee Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg">
+
+<div class="container">
+
+  <div class="header">
+     <!-- 🔙 Back -->
+    <button class="back-btn" onclick="goBack()">← Back</button>
+    <script>
+
+function goBack(){
+  window.history.back();
+}
+
+function logout(){
+  localStorage.clear();
+  location = "login.html";
+}
+
+</script>
+
+    <h1>Employee Dashboard</h1>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Attendance -->
+  <div class="glass-card">
+
+    <div class="card-title">
+      <div class="icon blue">⏱</div>
+      Attendance
+    </div>
+
+    <div class="row">
+      <input id="emp" placeholder="Employee ID">
+      <button class="btn-primary" onclick="checkin()">Check-in</button>
+      <button class="btn-danger" onclick="checkout()">Check-out</button>
+    </div>
+
+    <div id="attendanceMsg" class="msg"></div>
+
+  </div>
+
+  <!-- Leave -->
+  <div class="glass-card">
+
+    <div class="card-title">
+      <div class="icon orange">📝</div>
+      Request Leave
+    </div>
+
+    <div class="grid">
+      <input id="date" type="date">
+      <select id="type">
+        <option value="sick">Sick Leave</option>
+        <option value="personal">Personal Leave</option>
+        <option value="vacation">Vacation</option>
+      </select>
+      <input id="reason" placeholder="Reason">
+    </div>
+
+    <button class="btn-primary full" onclick="leave()">Submit Request</button>
+
+    <div id="leaveMsg" class="msg"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+if(localStorage.getItem("role") !== "employee"){
+  alert("Access denied");
+  location="login.html";
+}
+
+async function checkin(){
+ const res = await fetch('/api/checkin',{
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({employee_id:emp.value})
+ });
+ const d = await res.json();
+ attendanceMsg.innerText = d.msg || "Checked in";
+}
+
+async function checkout(){
+ const res = await fetch('/api/checkout',{
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({employee_id:emp.value})
+ });
+ const d = await res.json();
+ attendanceMsg.innerText =
+  d.msg || `Late ${d.late} min | Work ${d.work} min | OT ${d.ot} min`;
+}
+
+async function leave(){
+ const res = await fetch('/api/leave',{
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({
+   employee_id:emp.value,
+   leave_date:date.value,
+   leave_type:type.value,
+   reason:reason.value
+  })
+ });
+ const d = await res.json();
+ leaveMsg.innerText = d.msg || "Leave submitted";
+}
+
+function logout(){
+ localStorage.clear();
+ location="login.html";
+}
+</script>
+
+</body>
+</html>

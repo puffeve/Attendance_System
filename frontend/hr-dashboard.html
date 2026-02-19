@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HR Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<div class="sidebar">
+   
+    <!-- 🔙 Back Button -->
+  <button class="back-btn" onclick="goBack()">← Back</button> 
+  
+  <script>
+function goBack(){
+  window.history.back();
+}
+</script>
+
+
+  <div class="logo">HR Panel</div>
+
+  <button class="nav-btn active" onclick="location='hr-dashboard.html'">
+    📊 Dashboard
+  </button>
+
+  <button class="nav-btn" onclick="location='employees.html'">
+    👨‍💼 Employees
+  </button>
+
+  <button class="nav-btn" onclick="location='leave.html'">
+    📝 Leave Approval
+  </button>
+
+  <button class="nav-btn" onclick="location='reports.html'">
+    📈 Reports
+  </button>
+
+  <button class="nav-btn logout" onclick="logout()">
+    🚪 Logout
+  </button>
+
+</div>
+
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main">
+
+<h1 class="page-title">HR Dashboard</h1>
+
+<div class="card-grid">
+
+  <div class="stat-card">
+    <div class="stat-icon blue">👨‍💼</div>
+    <div>
+      <div class="stat-title">Total Employees</div>
+      <div class="stat-value" id="total">0</div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon green">✅</div>
+    <div>
+      <div class="stat-title">Present Today</div>
+      <div class="stat-value" id="present">0</div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon orange">📝</div>
+    <div>
+      <div class="stat-title">Pending Leave</div>
+      <div class="stat-value" id="pending">0</div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+/* ===== protect route ===== */
+if(localStorage.getItem("role") !== "hr"){
+ alert("Access denied");
+ location="login.html";
+}
+
+/* ===== LOAD DASHBOARD ===== */
+async function loadDashboard(){
+ try{
+
+  const res = await fetch('http://localhost:3000/api/dashboard');
+
+  if(!res.ok) throw new Error("API error");
+
+  const data = await res.json();
+
+  document.getElementById("total").innerText = data.totalEmployees || 0;
+  document.getElementById("present").innerText = data.presentToday || 0;
+  document.getElementById("pending").innerText = data.pendingLeave || 0;
+
+ }catch(err){
+  console.error(err);
+  alert("โหลดข้อมูลไม่ได้");
+ }
+}
+
+loadDashboard();
+
+/* ===== logout ===== */
+function logout(){
+ localStorage.clear();
+ location="login.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employees</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<div class="sidebar">
+
+  <!-- 🔙 BACK -->
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
+  <div class="logo">HR Panel</div>
+
+  <button class="nav-btn" onclick="location='hr-dashboard.html'">
+    📊 Dashboard
+  </button>
+
+  <button class="nav-btn active">
+    👨‍💼 Employees
+  </button>
+
+  <button class="nav-btn" onclick="location='leave.html'">
+    📝 Leave Approval
+  </button>
+
+  <button class="nav-btn" onclick="location='reports.html'">
+    📈 Reports
+  </button>
+
+  <button class="nav-btn logout" onclick="logout()">
+    🚪 Logout
+  </button>
+
+</div>
+
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+<h1 class="page-title">Employee Management</h1>
+
+<!-- ===== FORM CARD ===== -->
+<div class="form-card">
+
+  <div class="form-grid">
+    <input id="f" placeholder="First Name">
+    <input id="l" placeholder="Last Name">
+    <input id="d" placeholder="Department">
+    <input id="p" placeholder="Position">
+  </div>
+
+  <button class="primary-btn" onclick="add()">Add Employee</button>
+
+</div>
+
+<!-- ===== TABLE CARD ===== -->
+<div class="table-card">
+  <table id="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Department</th>
+        <th>Position</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+</div>
+
+
+<script>
+
+/* ================= PROTECT ROUTE ================= */
+
+if(localStorage.getItem("role") !== "hr"){
+ alert("Access denied");
+ location = "login.html";
+}
+
+
+/* ================= BACK BUTTON ================= */
+
+function goBack(){
+  localStorage.clear();   // (ถ้าต้องการ logout ด้วย)
+  window.location.href = "login.html";
+}
+
+/* ================= LOAD EMPLOYEES ================= */
+
+async function load(){
+ try{
+  const res = await fetch('http://localhost:3000/api/employees');
+  const data = await res.json();
+
+  const tbody = document.querySelector("#table tbody");
+  tbody.innerHTML = "";
+
+  data.forEach(e=>{
+    tbody.innerHTML += `
+      <tr>
+        <td>${e.first_name}</td>
+        <td>${e.last_name}</td>
+        <td>${e.department || '-'}</td>
+        <td>${e.position || '-'}</td>
+      </tr>
+    `;
+  });
+
+ }catch(err){
+  console.error(err);
+  alert("โหลดข้อมูลพนักงานไม่ได้");
+ }
+}
+
+
+/* ================= ADD EMPLOYEE ================= */
+
+async function add(){
+
+ if(!f.value || !l.value){
+  alert("First name และ Last name จำเป็น");
+  return;
+ }
+
+ try{
+
+  await fetch('http://localhost:3000/api/employees',{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({
+    first_name:f.value,
+    last_name:l.value,
+    department:d.value,
+    position:p.value
+   })
+  });
+
+  f.value="";
+  l.value="";
+  d.value="";
+  p.value="";
+
+  load();
+
+ }catch(err){
+  console.error(err);
+  alert("เพิ่มพนักงานไม่สำเร็จ");
+ }
+}
+
+
+/* ================= LOGOUT ================= */
+
+function logout(){
+ localStorage.clear();
+ location="login.html";
+}
+
+
+/* ================= INIT ================= */
+
+load();
+
+</script>
+
+</body>
+</html>

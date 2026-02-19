@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Leave Approval</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<div class="sidebar">
+
+  <!-- 🔙 BACK -->
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
+  <div class="logo">HR Panel</div>
+
+  <button class="nav-btn" onclick="location='hr-dashboard.html'">
+    📊 Dashboard
+  </button>
+
+  <button class="nav-btn" onclick="location='employees.html'">
+    👨‍💼 Employees
+  </button>
+
+  <button class="nav-btn active">
+    📝 Leave Approval
+  </button>
+
+  <button class="nav-btn" onclick="location='reports.html'">
+    📈 Reports
+  </button>
+
+  <button class="nav-btn logout" onclick="logout()">
+    🚪 Logout
+  </button>
+
+</div>
+
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+<h1 class="page-title">Leave Approval</h1>
+
+<div class="table-card">
+
+<table id="table">
+<thead>
+<tr>
+<th>Employee ID</th>
+<th>Date</th>
+<th>Type</th>
+<th>Reason</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ================= PROTECT ROUTE ================= */
+
+if(localStorage.getItem("role") !== "hr"){
+ alert("Access denied");
+ location = "login.html";
+}
+
+
+/* ================= BACK ================= */
+
+function goBack(){
+  localStorage.clear();   // (ถ้าต้องการ logout ด้วย)
+  window.location.href = "login.html";
+}
+
+
+
+/* ================= FORMAT DATE ================= */
+
+function formatDate(date){
+ return new Date(date).toLocaleDateString("th-TH",{
+  year:"numeric",
+  month:"short",
+  day:"numeric"
+ });
+}
+
+
+/* ================= LOAD DATA ================= */
+
+async function load(){
+
+ try{
+
+  const res = await fetch('http://localhost:3000/api/leave');
+  const data = await res.json();
+
+  const tbody = document.querySelector("#table tbody");
+  tbody.innerHTML = "";
+
+  data.forEach(l=>{
+
+   let statusClass = "status-pending";
+   if(l.status==="approved") statusClass="status-approved";
+   if(l.status==="rejected") statusClass="status-rejected";
+
+   tbody.innerHTML += `
+   <tr>
+    <td>${l.employee_id}</td>
+    <td>${formatDate(l.leave_date)}</td>
+    <td>${l.leave_type}</td>
+    <td>${l.reason}</td>
+    <td>
+      <span class="status ${statusClass}">
+        ${l.status}
+      </span>
+    </td>
+    <td>
+      ${l.status==="pending" ? `
+        <button class="approve-btn" onclick="update(${l.id},'approved')">
+          Approve
+        </button>
+        <button class="reject-btn" onclick="update(${l.id},'rejected')">
+          Reject
+        </button>
+      ` : `<span style="color:#999">Completed</span>`}
+    </td>
+   </tr>
+   `;
+  });
+
+ }catch(err){
+  console.error(err);
+  alert("โหลดข้อมูล leave ไม่ได้");
+ }
+
+}
+
+
+/* ================= UPDATE STATUS ================= */
+
+async function update(id,status){
+
+ if(!confirm("ยืนยันการดำเนินการ ?")) return;
+
+ try{
+
+  await fetch(`http://localhost:3000/api/leave/${id}`,{
+   method:'PUT',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({status})
+  });
+
+  load();
+
+ }catch(err){
+  console.error(err);
+  alert("อัปเดตสถานะไม่สำเร็จ");
+ }
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+function logout(){
+ localStorage.clear();
+ location="login.html";
+}
+
+
+/* ================= INIT ================= */
+
+load();
+
+</script>
+
+</body>
+</html>

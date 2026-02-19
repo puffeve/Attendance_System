@@ -1,0 +1,704 @@
+body{
+ margin:0;
+ font-family:Segoe UI, sans-serif;
+ background:#eef3fb;
+}
+
+/* ===== BASE ===== */
+
+body{
+ margin:0;
+ font-family:Segoe UI, sans-serif;
+ background:#eef3fb;
+}
+
+
+/* =================================
+   SIDEBAR (FIX HEIGHT + LOGOUT FIT)
+================================= */
+
+.sidebar{
+ width:240px;
+ height:100vh;
+ position:fixed;
+ left:0;
+ top:0;
+
+ display:flex;
+ flex-direction:column;
+
+ padding:24px 16px 16px 16px;   /* สมดุลบนล่าง */
+ box-sizing:border-box;
+
+ color:white;
+ background:linear-gradient(180deg,#2f80ed,#1c4fd8);
+}
+
+/* logo */
+.logo{
+ font-size:24px;
+ font-weight:700;
+ margin-bottom:24px;
+}
+
+/* navigation */
+.nav-btn{
+ width:100%;
+ padding:14px 16px;
+ margin-bottom:10px;
+ border:none;
+ border-radius:10px;
+ background:rgba(255,255,255,0.12);
+ color:white;
+ text-align:left;
+ cursor:pointer;
+ font-size:15px;
+ transition:.25s;
+}
+
+.nav-btn:hover{
+ background:rgba(255,255,255,0.2);
+ transform:translateX(6px);
+}
+
+.nav-btn.active{
+ background:white;
+ color:#2f80ed;
+ font-weight:600;
+}
+
+/* ===== LOGOUT PERFECT BOTTOM ===== */
+
+.nav-btn.logout{
+ margin-top:auto;        /* ดันลงล่างสุด */
+ margin-bottom:0;        /* ชิดล่าง */
+ background:rgba(255,80,80,0.25);
+}
+
+.nav-btn.logout:hover{
+ background:#ff4d4d;
+ color:white;
+ transform:none;
+}
+
+
+/* =================================
+   BACK BUTTON
+================================= */
+
+.back-btn{
+ background:rgba(255,255,255,0.15);
+ border:none;
+ color:white;
+ padding:10px 14px;
+ border-radius:8px;
+ cursor:pointer;
+ margin-bottom:20px;
+ font-size:14px;
+ transition:.2s;
+}
+
+.back-btn:hover{
+ background:white;
+ color:#2f80ed;
+ transform:translateX(-4px);
+}
+
+
+/* =================================
+   MAIN CONTENT
+================================= */
+
+.main{
+ margin-left:240px;
+ padding:40px;
+ min-height:100vh;
+ background:#eef3fb;
+ box-sizing:border-box;
+}
+
+
+/* =================================
+   LOGIN CENTER FIX (IMPORTANT)
+================================= */
+
+body.bg{
+ margin:0;
+ font-family:"Segoe UI", sans-serif;
+ background:linear-gradient(135deg,#1e6ffb,#6fa9ff);
+ min-height:100vh;
+
+ display:flex;
+ justify-content:center;
+ align-items:center;
+}
+
+/* container fix */
+.container{
+ width:100%;
+ max-width:420px;
+ padding:20px;
+ box-sizing:border-box;
+}
+
+/* glass login card */
+.login-card{
+ width:100%;
+ animation:fadeUp .5s ease;
+}
+
+/* form group */
+.form-group{
+ display:flex;
+ flex-direction:column;
+ margin-bottom:18px;
+}
+
+.form-group label{
+ font-size:13px;
+ margin-bottom:6px;
+ color:white;
+ font-weight:500;
+}
+
+.form-group input,
+.form-group select{
+ width:100%;
+ padding:12px 14px;
+ border:none;
+ border-radius:10px;
+ font-size:14px;
+ box-sizing:border-box;
+}
+
+/* login button */
+.login-btn{
+ width:100%;
+ margin-top:10px;
+ font-size:15px;
+}
+
+
+/* =================================
+   ANIMATION
+================================= */
+
+@keyframes fadeUp{
+ from{
+  opacity:0;
+  transform:translateY(20px);
+ }
+ to{
+  opacity:1;
+  transform:translateY(0);
+ }
+}
+
+/* ===== MAIN ===== */
+
+.main{
+  margin-left:260px;   /* สำคัญมาก */
+  padding:40px;
+  min-height:100vh;
+  background:#eef3fb;
+}
+
+
+h1{
+ margin-bottom:30px;
+}
+
+/* ===== CARD ===== */
+
+.card{
+ background:white;
+ padding:25px;
+ border-radius:14px;
+ margin-bottom:20px;
+ box-shadow:0 5px 15px rgba(0,0,0,0.05);
+ font-size:18px;
+}
+
+.kpi{
+ font-size:34px;
+ font-weight:700;
+ color:#2f80ed;
+ margin-top:10px;
+}
+
+.page-title{
+ margin-bottom:30px;
+ font-size:28px;
+ font-weight:700;
+}
+
+/* ===== GRID ===== */
+
+.card-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+ gap:20px;
+}
+
+/* ===== CARD ===== */
+
+.stat-card{
+ background:white;
+ padding:25px;
+ border-radius:16px;
+ display:flex;
+ align-items:center;
+ gap:18px;
+ box-shadow:0 10px 25px rgba(0,0,0,0.05);
+ transition:.25s;
+}
+
+.stat-card:hover{
+ transform:translateY(-5px);
+ box-shadow:0 15px 30px rgba(0,0,0,0.08);
+}
+
+/* ===== ICON ===== */
+
+.stat-icon{
+ width:55px;
+ height:55px;
+ border-radius:14px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:24px;
+ color:white;
+}
+
+.blue{ background:#2f80ed; }
+.green{ background:#27ae60; }
+.orange{ background:#f2994a; }
+
+/* ===== TEXT ===== */
+
+.stat-title{
+ font-size:14px;
+ color:#777;
+ margin-bottom:4px;
+}
+
+.stat-value{
+ font-size:30px;
+ font-weight:700;
+}
+/* ===== FORM CARD ===== */
+
+.form-card{
+ background:white;
+ padding:25px;
+ border-radius:16px;
+ box-shadow:0 8px 20px rgba(0,0,0,0.05);
+ margin-bottom:30px;
+}
+
+.form-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+ gap:15px;
+ margin-bottom:15px;
+}
+
+.form-grid input{
+ padding:12px;
+ border-radius:10px;
+ border:1px solid #ddd;
+ font-size:14px;
+}
+
+.form-grid input:focus{
+ outline:none;
+ border:1px solid #2f80ed;
+ box-shadow:0 0 0 2px rgba(47,128,237,0.2);
+}
+
+/* ===== BUTTON ===== */
+
+.primary-btn{
+ background:#2f80ed;
+ color:white;
+ padding:12px 20px;
+ border:none;
+ border-radius:10px;
+ cursor:pointer;
+ font-weight:600;
+ transition:.2s;
+}
+
+.primary-btn:hover{
+ background:#1c4fd8;
+ transform:translateY(-2px);
+}
+
+/* ===== TABLE ===== */
+
+.table-card{
+ background:white;
+ padding:20px;
+ border-radius:16px;
+ box-shadow:0 8px 20px rgba(0,0,0,0.05);
+}
+
+table{
+ width:100%;
+ border-collapse:collapse;
+}
+
+th{
+ background:#f2f6ff;
+ padding:14px;
+ text-align:left;
+ font-weight:600;
+}
+
+td{
+ padding:14px;
+ border-bottom:1px solid #eee;
+}
+
+tr:hover{
+ background:#f9fbff;
+}
+/* ===== STATUS BADGE ===== */
+
+.status{
+ padding:6px 10px;
+ border-radius:20px;
+ font-size:12px;
+ font-weight:600;
+}
+
+.status-pending{
+ background:#fff4e5;
+ color:#f2994a;
+}
+
+.status-approved{
+ background:#e6f7ee;
+ color:#27ae60;
+}
+
+.status-rejected{
+ background:#fdeaea;
+ color:#eb5757;
+}
+
+/* ===== ACTION BUTTONS ===== */
+
+.approve-btn{
+ background:#27ae60;
+ color:white;
+ border:none;
+ padding:6px 10px;
+ border-radius:8px;
+ cursor:pointer;
+ margin-right:5px;
+}
+
+.approve-btn:hover{
+ background:#1e944e;
+}
+
+.reject-btn{
+ background:#eb5757;
+ color:white;
+ border:none;
+ padding:6px 10px;
+ border-radius:8px;
+ cursor:pointer;
+}
+
+.reject-btn:hover{
+ background:#c0392b;
+}
+/* ===== CHART CARD ===== */
+
+.chart-card{
+ background:white;
+ padding:30px;
+ border-radius:16px;
+ box-shadow:0 8px 20px rgba(0,0,0,0.05);
+
+}
+/* ===== LOGIN PAGE ===== */
+
+body.bg{
+  margin:0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg,#1e6ffb,#6fa9ff);
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.container{
+  width:100%;
+  max-width:420px;
+}
+
+.subtitle{
+  color:#777;
+  margin-bottom:25px;
+  font-size:14px;
+}
+
+/* inputs */
+.input-group{
+  text-align:left;
+  margin-bottom:18px;
+}
+
+.input-group label{
+  font-size:13px;
+  font-weight:600;
+  color:#444;
+}
+
+.input-group input,
+.input-group select{
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  font-size:14px;
+  transition:.2s;
+}
+
+.input-group input:focus,
+.input-group select:focus{
+  border-color:#1e6ffb;
+  outline:none;
+  box-shadow:0 0 0 2px rgba(30,111,251,.2);
+}
+
+/* button */
+.login-btn{
+  width:100%;
+  padding:12px;
+  background:linear-gradient(135deg,#1e6ffb,#4da3ff);
+  border:none;
+  border-radius:10px;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+  margin-top:10px;
+}
+
+.login-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(30,111,251,.3);
+}
+
+/* hint */
+.hint{
+  margin-top:15px;
+  font-size:12px;
+  color:#999;
+}
+/* ===== GLOBAL ===== */
+
+body.bg{
+  margin:0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg,#1e6ffb,#6fa9ff);
+  min-height:100vh;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+/* ===== HEADER ===== */
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:white;
+  margin-bottom:30px;
+}
+
+.logout{
+  border:none;
+  background:rgba(255,255,255,.2);
+  color:white;
+  padding:10px 18px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* ===== GLASS CARD ===== */
+
+.glass-card{
+  background:rgba(255,255,255,0.25);
+  backdrop-filter: blur(20px);
+  border-radius:16px;
+  padding:25px;
+  margin-bottom:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  color:white;
+  transition:.25s;
+}
+
+.glass-card:hover{
+  transform:translateY(-4px);
+}
+
+/* ===== CARD TITLE ===== */
+
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:20px;
+  margin-bottom:20px;
+  font-weight:600;
+}
+
+.icon{
+  width:44px;
+  height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  font-size:20px;
+}
+
+.blue{ background:#1e6ffb; }
+.orange{ background:#ff8c2f; }
+
+/* ===== INPUT ===== */
+
+input,select{
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  width:100%;
+  font-size:15px;
+}
+
+/* ===== LAYOUT ===== */
+
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:15px;
+}
+
+/* ===== BUTTON ===== */
+
+.btn-primary{
+  background:white;
+  color:#1e6ffb;
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.btn-danger{
+  background:#ff4d4d;
+  color:white;
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.full{
+  width:100%;
+}
+
+/* ===== MESSAGE ===== */
+
+.msg{
+  margin-top:12px;
+  font-size:14px;
+  opacity:.9;
+}
+/* ===== LOGIN FIX ===== */
+
+.login-card{
+  max-width:420px;
+  margin:auto;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  margin-bottom:18px;
+}
+
+.form-group label{
+  font-size:13px;
+  margin-bottom:6px;
+  color:white;
+  font-weight:500;
+}
+
+.form-group input,
+.form-group select{
+  width:100%;              
+  padding:12px 14px;
+  border:none;
+  border-radius:10px;
+  font-size:14px;
+  box-sizing:border-box;   
+}
+
+
+.login-btn{
+  margin-top:10px;
+  font-size:15px;
+}
+
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+/* ===== BACK BUTTON ===== */
+
+.back-btn{
+  background:rgba(255,255,255,0.15);
+  border:none;
+  color:white;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-bottom:20px;
+  font-size:14px;
+  transition:.2s;
+}
+
+.back-btn:hover{
+  background:white;
+  color:#2f80ed;
+  transform:translateX(-4px);
+}
