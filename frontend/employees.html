@@ -89,8 +89,7 @@ if(localStorage.getItem("role") !== "hr"){
 /* ================= BACK BUTTON ================= */
 
 function goBack(){
-  localStorage.clear();   // (ถ้าต้องการ logout ด้วย)
-  window.location.href = "login.html";
+  window.history.back();
 }
 
 /* ================= LOAD EMPLOYEES ================= */

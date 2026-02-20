@@ -78,10 +78,8 @@ if(localStorage.getItem("role") !== "hr"){
 /* ================= BACK ================= */
 
 function goBack(){
-  localStorage.clear();   // (ถ้าต้องการ logout ด้วย)
-  window.location.href = "login.html";
+  window.history.back();
 }
-
 
 
 /* ================= FORMAT DATE ================= */
