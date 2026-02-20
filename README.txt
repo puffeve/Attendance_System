@@ -1,11 +1,31 @@
 
 INTERVIEW READY ATTENDANCE SYSTEM
 
-1 Import database/schema.sql
-2 cd backend
-3 npm install
-4 node server.js
-5 open http://localhost:3000
-
 LOGIN
 admin / 1234
+
+ระบบนี้คือ ระบบบันทึกเวลาทำงานพนักงาน (Employee Attendance Management System)
+ใช้สำหรับ HR และพนักงาน เพื่อจัดการ:
+- เช็คชื่อเข้า–ออกงาน
+- คำนวณเวลาทำงาน / OT / มาสาย
+- ขอลา / อนุมัติลา
+- ดูสรุปรายงาน
+- จัดการพนักงาน
+เป็นระบบ Full-stack Web Application
+
+เทคโนโลยีที่ใช้
+Backend
+- Node.js
+- Express.js
+- REST API
+
+Database
+- MySQL relational database
+
+Frontend
+- HTML
+- CSS
+- JavaScript 
+
+Chart
+- Chart.js
